@@ -1,0 +1,20 @@
+Source: capi-location-route
+Section: libs
+Priority: extra
+Maintainer: Kangho Hur <kagho.hur@samsung.com>, Byungyoo Lee <bw1212.lee@samsung.com>, Youngae Kang <youngae.kang@samsung.com>, Minjune Kim <sena06.kim@samsung.com>, Genie Kim <daejins.kim@samsung.com>
+Build-Depends: debhelper (>= 5), libslp-location-dev , capi-base-common-dev , capi-location-manager-dev, dlog-dev
+
+Package: capi-location-route
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A Location Route library in Tizen Native API
+
+Package: capi-location-route-dev
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, capi-location-route (= ${Source-Version}), capi-base-common-dev , capi-location-manager-dev
+Description: A Location Route library in Tizen Native API (DEV)
+
+Package: capi-location-route-dbg
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, capi-location-route (= ${Source-Version})
+Description: A Location Route library in Tizen Native API (DBG)

@@ -1,0 +1,23 @@
+capi-location-route (0.1.0-3) unstable; urgency=low
+
+  * add get transport mode in route step
+  * Git: slp-source.sec.samsung.net:slp/api/route
+  * Tag: capi-location-route_0.1.0-3
+
+ -- Genie Kim <daejins.kim@samsung.com>  Tue, 27 Mar 2012 21:30:53 +0900
+
+capi-location-route (0.1.0-2) unstable; urgency=low
+
+  * add TC for route_service / route_preference / route
+  * Git: slp-source.sec.samsung.net:slp/api/route
+  * Tag: capi-location-route_0.1.0-2
+
+ -- Genie Kim <daejins.kim@samsung.com>  Wed, 21 Mar 2012 20:36:24 +0900
+
+capi-location-route (0.1.0-1) unstable; urgency=low
+
+  * Initial release
+  * Git: slp-source.sec.samsung.net:slp/api/route
+  * Tag: capi-location-route_0.1.0-1
+
+ -- Genie Kim <daejins.kim@samsung.com>  Mon, 19 Mar 2012 00:00:00 +0900
