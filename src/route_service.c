@@ -161,10 +161,10 @@ int route_service_create(route_service_h * service)
 		ROUTE_SERVICE_PRINT_ERROR_CODE_RETURN(ROUTE_ERROR_OUT_OF_MEMORY);
 	}
 
-	handle->object = location_new(LOCATION_METHOD_HYBRID);
+	handle->object = location_map_new(NULL);
 	if (handle->object == NULL) {
 		free(handle);
-		LOGE("Fail to location_new");
+		LOGE("Fail to location_map_new");
 		ROUTE_SERVICE_PRINT_ERROR_CODE_RETURN(ROUTE_ERROR_SERVICE_NOT_AVAILABLE);
 	}
 
@@ -183,7 +183,7 @@ int route_service_destroy(route_service_h service)
 		route_preference_destroy(handle->route_preference);
 	}
 
-	int ret = location_free(handle->object);
+	int ret = location_map_free(handle->object);
 	if (ret != LOCATION_ERROR_NONE) {
 		return _convert_error_code(ret, __FUNCTION__);
 	}
@@ -272,8 +272,7 @@ int route_service_find(route_service_h service, location_coords_s origin, locati
 	calldata->callback = callback;
 	calldata->data = user_data;
 
-	ret =
-	    location_request_route(handle->object, &start, &end, waypoint, pref->preference, __LocationRouteCB, calldata,
+	ret = location_map_request_route(handle->object, &start, &end, waypoint, pref->preference, __LocationRouteCB, calldata,
 				   &reqid);
 	if (ret != LOCATION_ERROR_NONE) {
 		free(calldata);
@@ -296,7 +295,7 @@ int route_service_cancel(route_service_h service, int request_id)
 
 	route_service_s *handle = (route_service_s *) service;
 
-	ret = location_cancel_route_request(handle->object, request_id);
+	ret = location_map_cancel_route_request(handle->object, request_id);
 
 	if (ret != LOCATION_ERROR_NONE) {
 		return _convert_error_code(ret, __func__);

@@ -18,6 +18,7 @@
 #define	__TIZEN_LOCATION_ROUTE_PRIVATE_H__
 
 #include <location.h>
+#include <location-map-service.h>
 
 #include "route_preference.h"
 
@@ -27,7 +28,7 @@ extern "C" {
 
 
 typedef struct _route_service_s{
-    LocationObject* object;
+    LocationMapObject* object;
     route_preference_h route_preference;
 } route_service_s;
 

@@ -609,17 +609,17 @@ bool route_preference_is_area_to_avoid_supported(route_service_h service, locati
 	switch (type) {
 	case LOCATION_BOUNDS_RECT:
 		ret =
-		    (bool) location_is_supported_map_provider_capability(handle->object,
+		    (bool) location_map_is_supported_provider_capability(handle->object,
 									 MAP_SERVICE_ROUTE_REQUEST_RECT_AREA_TO_AVOID);
 		break;
 	case LOCATION_BOUNDS_CIRCLE:
 		ret =
-		    (bool) location_is_supported_map_provider_capability(handle->object,
+		    (bool) location_map_is_supported_provider_capability(handle->object,
 									 MAP_SERVICE_ROUTE_REQUEST_CIRCLE_AREA_TO_AVOID);
 		break;
 	case LOCATION_BOUNDS_POLYGON:
 		ret =
-		    (bool) location_is_supported_map_provider_capability(handle->object,
+		    (bool) location_map_is_supported_provider_capability(handle->object,
 									 MAP_SERVICE_ROUTE_REQUEST_POLYGON_AREA_TO_AVOID);
 		break;
 	default:
@@ -635,7 +635,7 @@ bool route_preference_is_address_to_avoid_supported(route_service_h service)
 	ROUTE_PREFERENCE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
 	route_service_s *handle = (route_service_s *) service;
-	bool ret = (bool) location_is_supported_map_provider_capability(handle->object,
+	bool ret = (bool) location_map_is_supported_provider_capability(handle->object,
 									MAP_SERVICE_ROUTE_REQUEST_FREEFORM_ADDR_TO_AVOID);
 
 	return ret;
@@ -647,7 +647,7 @@ bool route_preference_is_geometry_bounding_box_supported(route_service_h service
 
 	route_service_s *handle = (route_service_s *) service;
 	bool ret =
-	    (bool) location_is_supported_map_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_GEOMETRY_BOUNDING_BOX);
+	    (bool) location_map_is_supported_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_GEOMETRY_BOUNDING_BOX);
 
 	return ret;
 }
@@ -658,7 +658,7 @@ bool route_preference_is_geometry_supported(route_service_h service)
 
 	route_service_s *handle = (route_service_s *) service;
 	bool ret =
-	    (bool) location_is_supported_map_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_GEOMETRY_RETRIEVAL);
+	    (bool) location_map_is_supported_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_GEOMETRY_RETRIEVAL);
 
 	return ret;
 }
@@ -669,7 +669,7 @@ bool route_preference_is_instruction_geometry_supported(route_service_h service)
 
 	route_service_s *handle = (route_service_s *) service;
 	bool ret =
-	    (bool) location_is_supported_map_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_INSTRUCTION_GEOMETRY);
+	    (bool) location_map_is_supported_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_INSTRUCTION_GEOMETRY);
 
 	return ret;
 }
@@ -679,7 +679,7 @@ bool route_preference_is_instruction_bounding_box_supported(route_service_h serv
 	ROUTE_PREFERENCE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
 	route_service_s *handle = (route_service_s *) service;
-	bool ret = (bool) location_is_supported_map_provider_capability(handle->object,
+	bool ret = (bool) location_map_is_supported_provider_capability(handle->object,
 									MAP_SERVICE_ROUTE_PREF_INSTRUCTION_BOUNDING_BOX);
 
 	return ret;
@@ -691,7 +691,7 @@ bool route_preference_is_instruction_supported(route_service_h service)
 
 	route_service_s *handle = (route_service_s *) service;
 	bool ret =
-	    (bool) location_is_supported_map_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_INSTRUCTION_RETRIEVAL);
+	    (bool) location_map_is_supported_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_INSTRUCTION_RETRIEVAL);
 
 	return ret;
 }
@@ -702,7 +702,7 @@ bool route_preference_is_traffic_data_supported(route_service_h service)
 
 	route_service_s *handle = (route_service_s *) service;
 	bool ret =
-	    (bool) location_is_supported_map_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_REALTIME_TRAFFIC);
+	    (bool) location_map_is_supported_provider_capability(handle->object, MAP_SERVICE_ROUTE_PREF_REALTIME_TRAFFIC);
 
 	return ret;
 }
@@ -716,8 +716,8 @@ int route_preference_foreach_available_constraints(route_service_h service, rout
 	route_service_s *handle = (route_service_s *) service;
 	LocationMapServiceType type = MAP_SERVICE_ROUTE_REQUEST_FEATURE_TO_AVOID;
 	GList *constraint_list = NULL;
-	int ret = location_get_map_provider_capability_key(handle->object, type, &constraint_list);
-	if (!ret) {
+	int ret = location_map_get_provider_capability_key(handle->object, type, &constraint_list);
+	if (ret) {
 		return _convert_error_code(ret, __FUNCTION__);
 	}
 
@@ -741,8 +741,8 @@ int route_preference_foreach_available_goals(route_service_h service, route_pref
 	route_service_s *handle = (route_service_s *) service;
 	LocationMapServiceType type = MAP_SERVICE_ROUTE_PREF_TYPE;
 	GList *goal_list = NULL;
-	int ret = location_get_map_provider_capability_key(handle->object, type, &goal_list);
-	if (!ret) {
+	int ret = location_map_get_provider_capability_key(handle->object, type, &goal_list);
+	if (ret) {
 		return _convert_error_code(ret, __FUNCTION__);
 	}
 
@@ -766,8 +766,8 @@ int route_preference_foreach_available_transport_modes(route_service_h service,
 	route_service_s *handle = (route_service_s *) service;
 	LocationMapServiceType type = MAP_SERVICE_ROUTE_PREF_TRANSPORT_MODE;
 	GList *mode_list = NULL;
-	int ret = location_get_map_provider_capability_key(handle->object, type, &mode_list);
-	if (!ret) {
+	int ret = location_map_get_provider_capability_key(handle->object, type, &mode_list);
+	if (ret) {
 		return _convert_error_code(ret, __FUNCTION__);
 	}
 
@@ -791,8 +791,8 @@ int route_preference_foreach_available_property_keys(route_service_h service,
 	route_service_s *handle = (route_service_s *) service;
 	LocationMapServiceType type = MAP_SERVICE_ROUTE_PREF_PROPERTY;
 	GList *key_list = NULL;
-	int ret = location_get_map_provider_capability_key(handle->object, type, &key_list);
-	if (!ret) {
+	int ret = location_map_get_provider_capability_key(handle->object, type, &key_list);
+	if (ret) {
 		return _convert_error_code(ret, __FUNCTION__);
 	}
 
@@ -817,8 +817,8 @@ int route_preference_foreach_available_property_values(route_service_h service, 
 	route_service_s *handle = (route_service_s *) service;
 	LocationMapServiceType type = MAP_SERVICE_ROUTE_PREF_PROPERTY;
 	GList *key_list = NULL;
-	int ret = location_get_map_provider_capability_key(handle->object, type, &key_list);
-	if (!ret) {
+	int ret = location_map_get_provider_capability_key(handle->object, type, &key_list);
+	if (ret) {
 		return _convert_error_code(ret, __FUNCTION__);
 	}
 
