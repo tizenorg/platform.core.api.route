@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2011 Samsung Electronics Co., Ltd All Rights Reserved
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright (c) 2011-2013 Samsung Electronics Co., Ltd All Rights Reserved
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #include <location/location.h>
 #include <location/location-types.h>
@@ -69,7 +69,7 @@ static int _convert_error_code(int code)
 /*
  * Route preference
  */
-int route_preference_create(route_preference_h * preference)
+EXPORT_API int route_preference_create(route_preference_h * preference)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -82,6 +82,7 @@ int route_preference_create(route_preference_h * preference)
 	handle->preference = location_route_pref_new();
 
 	if (handle->preference == NULL) {
+		free(handle);
 		ROUTE_PRINT_ERROR_CODE_RETURN(ROUTE_ERROR_SERVICE_NOT_AVAILABLE);
 	}
 
@@ -90,7 +91,7 @@ int route_preference_create(route_preference_h * preference)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_destroy(route_preference_h preference)
+EXPORT_API int route_preference_destroy(route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -105,7 +106,7 @@ int route_preference_destroy(route_preference_h preference)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_foreach_addresses_to_avoid(route_preference_h preference, route_preference_address_to_avoid_cb callback,
+EXPORT_API int route_preference_foreach_addresses_to_avoid(route_preference_h preference, route_preference_address_to_avoid_cb callback,
 						void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
@@ -125,7 +126,7 @@ int route_preference_foreach_addresses_to_avoid(route_preference_h preference, r
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_foreach_areas_to_avoid(route_preference_h preference, route_preference_area_to_avoid_cb callback,
+EXPORT_API int route_preference_foreach_areas_to_avoid(route_preference_h preference, route_preference_area_to_avoid_cb callback,
 					    void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
@@ -146,7 +147,7 @@ int route_preference_foreach_areas_to_avoid(route_preference_h preference, route
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_foreach_constraints(route_preference_h preference, route_preference_constraint_cb callback,
+EXPORT_API int route_preference_foreach_constraints(route_preference_h preference, route_preference_constraint_cb callback,
 					 void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
@@ -166,7 +167,7 @@ int route_preference_foreach_constraints(route_preference_h preference, route_pr
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_foreach_properties(route_preference_h preference, route_preference_property_cb callback, void *user_data)
+EXPORT_API int route_preference_foreach_properties(route_preference_h preference, route_preference_property_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(callback);
@@ -188,7 +189,7 @@ int route_preference_foreach_properties(route_preference_h preference, route_pre
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_get_geometry_bounding_box(route_preference_h preference, location_coords_s * top_left,
+EXPORT_API int route_preference_get_geometry_bounding_box(route_preference_h preference, location_coords_s * top_left,
 					       location_coords_s * bottom_right)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
@@ -210,7 +211,7 @@ int route_preference_get_geometry_bounding_box(route_preference_h preference, lo
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_get_max_results(route_preference_h preference, int *max_results)
+EXPORT_API int route_preference_get_max_results(route_preference_h preference, int *max_results)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(max_results);
@@ -223,7 +224,7 @@ int route_preference_get_max_results(route_preference_h preference, int *max_res
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_get_goal(route_preference_h preference, char **goal)
+EXPORT_API int route_preference_get_goal(route_preference_h preference, char **goal)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(goal);
@@ -243,7 +244,7 @@ int route_preference_get_goal(route_preference_h preference, char **goal)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_get_transport_mode(route_preference_h preference, char **mode)
+EXPORT_API int route_preference_get_transport_mode(route_preference_h preference, char **mode)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(mode);
@@ -263,7 +264,7 @@ int route_preference_get_transport_mode(route_preference_h preference, char **mo
 	return ROUTE_ERROR_NONE;
 }
 
-bool route_preference_is_geometry_used(route_preference_h preference)
+EXPORT_API bool route_preference_is_geometry_used(route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(preference);
 
@@ -273,7 +274,7 @@ bool route_preference_is_geometry_used(route_preference_h preference)
 	return ret;
 }
 
-bool route_preference_is_instruction_bounding_box_used(route_preference_h preference)
+EXPORT_API bool route_preference_is_instruction_bounding_box_used(route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(preference);
 
@@ -283,7 +284,7 @@ bool route_preference_is_instruction_bounding_box_used(route_preference_h prefer
 	return ret;
 }
 
-bool route_preference_is_instruction_geometry_used(route_preference_h preference)
+EXPORT_API bool route_preference_is_instruction_geometry_used(route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(preference);
 
@@ -293,7 +294,7 @@ bool route_preference_is_instruction_geometry_used(route_preference_h preference
 	return ret;
 }
 
-bool route_preference_is_instruction_used(route_preference_h preference)
+EXPORT_API bool route_preference_is_instruction_used(route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(preference);
 
@@ -303,7 +304,7 @@ bool route_preference_is_instruction_used(route_preference_h preference)
 	return ret;
 }
 
-bool route_preference_is_traffic_data_used(route_preference_h preference)
+EXPORT_API bool route_preference_is_traffic_data_used(route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(preference);
 
@@ -313,7 +314,7 @@ bool route_preference_is_traffic_data_used(route_preference_h preference)
 	return ret;
 }
 
-int route_preference_get(route_preference_h preference, const char *key, char **value)
+EXPORT_API int route_preference_get(route_preference_h preference, const char *key, char **value)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(key);
@@ -329,7 +330,7 @@ int route_preference_get(route_preference_h preference, const char *key, char **
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set(route_preference_h preference, const char *key, const char *value)
+EXPORT_API int route_preference_set(route_preference_h preference, const char *key, const char *value)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(key);
@@ -345,7 +346,7 @@ int route_preference_set(route_preference_h preference, const char *key, const c
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_add_address_to_avoid(route_preference_h preference, const char *address)
+EXPORT_API int route_preference_add_address_to_avoid(route_preference_h preference, const char *address)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(address);
@@ -362,7 +363,7 @@ int route_preference_add_address_to_avoid(route_preference_h preference, const c
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_clear_addresses_to_avoid(route_preference_h preference)
+EXPORT_API int route_preference_clear_addresses_to_avoid(route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -377,7 +378,7 @@ int route_preference_clear_addresses_to_avoid(route_preference_h preference)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_add_area_to_avoid(route_preference_h preference, location_bounds_h area)
+EXPORT_API int route_preference_add_area_to_avoid(route_preference_h preference, location_bounds_h area)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(area);
@@ -394,7 +395,7 @@ int route_preference_add_area_to_avoid(route_preference_h preference, location_b
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_clear_areas_to_avoid(route_preference_h preference)
+EXPORT_API int route_preference_clear_areas_to_avoid(route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -409,7 +410,7 @@ int route_preference_clear_areas_to_avoid(route_preference_h preference)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_add_constraint(route_preference_h preference, const char *constraint)
+EXPORT_API int route_preference_add_constraint(route_preference_h preference, const char *constraint)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(constraint);
@@ -426,7 +427,7 @@ int route_preference_add_constraint(route_preference_h preference, const char *c
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_clear_constraints(route_preference_h preference)
+EXPORT_API int route_preference_clear_constraints(route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -441,8 +442,8 @@ int route_preference_clear_constraints(route_preference_h preference)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set_geometry_bounding_box(route_preference_h preference, location_coords_s top_left,
-					       location_coords_s bottom_right)
+EXPORT_API int route_preference_set_geometry_bounding_box(route_preference_h preference,
+						location_coords_s top_left, location_coords_s bottom_right)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_CHECK_CONDITION(top_left.latitude>=-90 && top_left.latitude<=90 ,ROUTE_ERROR_INVALID_PARAMETER,"latitude should be -90 <= latitude <= 90");
@@ -472,7 +473,7 @@ int route_preference_set_geometry_bounding_box(route_preference_h preference, lo
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set_max_results(route_preference_h preference, int max_results)
+EXPORT_API int route_preference_set_max_results(route_preference_h preference, int max_results)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -485,7 +486,7 @@ int route_preference_set_max_results(route_preference_h preference, int max_resu
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set_goal(route_preference_h preference, const char *goal)
+EXPORT_API int route_preference_set_goal(route_preference_h preference, const char *goal)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(goal);
@@ -499,7 +500,7 @@ int route_preference_set_goal(route_preference_h preference, const char *goal)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set_transport_mode(route_preference_h preference, const char *mode)
+EXPORT_API int route_preference_set_transport_mode(route_preference_h preference, const char *mode)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 	ROUTE_NULL_ARG_CHECK(mode);
@@ -513,7 +514,7 @@ int route_preference_set_transport_mode(route_preference_h preference, const cha
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set_geometry_used(route_preference_h preference, bool used)
+EXPORT_API int route_preference_set_geometry_used(route_preference_h preference, bool used)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -526,7 +527,7 @@ int route_preference_set_geometry_used(route_preference_h preference, bool used)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set_instruction_bounding_box_used(route_preference_h preference, bool used)
+EXPORT_API int route_preference_set_instruction_bounding_box_used(route_preference_h preference, bool used)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -540,7 +541,7 @@ int route_preference_set_instruction_bounding_box_used(route_preference_h prefer
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set_instruction_geometry_used(route_preference_h preference, bool used)
+EXPORT_API int route_preference_set_instruction_geometry_used(route_preference_h preference, bool used)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -554,7 +555,7 @@ int route_preference_set_instruction_geometry_used(route_preference_h preference
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set_instruction_used(route_preference_h preference, bool used)
+EXPORT_API int route_preference_set_instruction_used(route_preference_h preference, bool used)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -567,7 +568,7 @@ int route_preference_set_instruction_used(route_preference_h preference, bool us
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_set_traffic_data_used(route_preference_h preference, bool used)
+EXPORT_API int route_preference_set_traffic_data_used(route_preference_h preference, bool used)
 {
 	ROUTE_NULL_ARG_CHECK(preference);
 
@@ -580,7 +581,7 @@ int route_preference_set_traffic_data_used(route_preference_h preference, bool u
 	return ROUTE_ERROR_NONE;
 }
 
-bool route_preference_is_area_to_avoid_supported(route_service_h service, location_bounds_type_e type)
+EXPORT_API bool route_preference_is_area_to_avoid_supported(route_service_h service, location_bounds_type_e type)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
@@ -610,7 +611,7 @@ bool route_preference_is_area_to_avoid_supported(route_service_h service, locati
 	return ret;
 }
 
-bool route_preference_is_address_to_avoid_supported(route_service_h service)
+EXPORT_API bool route_preference_is_address_to_avoid_supported(route_service_h service)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
@@ -621,7 +622,7 @@ bool route_preference_is_address_to_avoid_supported(route_service_h service)
 	return ret;
 }
 
-bool route_preference_is_geometry_bounding_box_supported(route_service_h service)
+EXPORT_API bool route_preference_is_geometry_bounding_box_supported(route_service_h service)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
@@ -632,7 +633,7 @@ bool route_preference_is_geometry_bounding_box_supported(route_service_h service
 	return ret;
 }
 
-bool route_preference_is_geometry_supported(route_service_h service)
+EXPORT_API bool route_preference_is_geometry_supported(route_service_h service)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
@@ -643,7 +644,7 @@ bool route_preference_is_geometry_supported(route_service_h service)
 	return ret;
 }
 
-bool route_preference_is_instruction_geometry_supported(route_service_h service)
+EXPORT_API bool route_preference_is_instruction_geometry_supported(route_service_h service)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
@@ -654,7 +655,7 @@ bool route_preference_is_instruction_geometry_supported(route_service_h service)
 	return ret;
 }
 
-bool route_preference_is_instruction_bounding_box_supported(route_service_h service)
+EXPORT_API bool route_preference_is_instruction_bounding_box_supported(route_service_h service)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
@@ -665,7 +666,7 @@ bool route_preference_is_instruction_bounding_box_supported(route_service_h serv
 	return ret;
 }
 
-bool route_preference_is_instruction_supported(route_service_h service)
+EXPORT_API bool route_preference_is_instruction_supported(route_service_h service)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
@@ -676,7 +677,7 @@ bool route_preference_is_instruction_supported(route_service_h service)
 	return ret;
 }
 
-bool route_preference_is_traffic_data_supported(route_service_h service)
+EXPORT_API bool route_preference_is_traffic_data_supported(route_service_h service)
 {
 	ROUTE_NULL_ARG_CHECK_RETURN_FALSE(service);
 
@@ -687,7 +688,7 @@ bool route_preference_is_traffic_data_supported(route_service_h service)
 	return ret;
 }
 
-int route_preference_foreach_available_constraints(route_service_h service, route_preference_available_constraint_cb callback,
+EXPORT_API int route_preference_foreach_available_constraints(route_service_h service, route_preference_available_constraint_cb callback,
 						   void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(service);
@@ -712,7 +713,7 @@ int route_preference_foreach_available_constraints(route_service_h service, rout
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_foreach_available_goals(route_service_h service, route_preference_available_goal_cb callback,
+EXPORT_API int route_preference_foreach_available_goals(route_service_h service, route_preference_available_goal_cb callback,
 					     void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(service);
@@ -737,7 +738,7 @@ int route_preference_foreach_available_goals(route_service_h service, route_pref
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_foreach_available_transport_modes(route_service_h service,
+EXPORT_API int route_preference_foreach_available_transport_modes(route_service_h service,
 						       route_preference_available_transport_mode_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(service);
@@ -762,7 +763,7 @@ int route_preference_foreach_available_transport_modes(route_service_h service,
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_foreach_available_property_keys(route_service_h service,
+EXPORT_API int route_preference_foreach_available_property_keys(route_service_h service,
 						     route_preference_available_property_key_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(service);
@@ -787,7 +788,7 @@ int route_preference_foreach_available_property_keys(route_service_h service,
 	return ROUTE_ERROR_NONE;
 }
 
-int route_preference_foreach_available_property_values(route_service_h service, const char *key,
+EXPORT_API int route_preference_foreach_available_property_values(route_service_h service, const char *key,
 						       route_preference_available_property_value_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(service);

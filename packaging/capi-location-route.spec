@@ -1,6 +1,6 @@
 Name:       capi-location-route
 Summary:    A Location Route library in Tizen Native API
-Version:    0.1.3
+Version:    0.1.4
 Release:    1
 Group:      System/Libraries
 License:    Apache Licensc, Version 2.0

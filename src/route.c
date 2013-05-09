@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2011 Samsung Electronics Co., Ltd All Rights Reserved
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright (c) 2011-2013 Samsung Electronics Co., Ltd All Rights Reserved
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #include <location/location.h>
 #include <location/location-types.h>
@@ -29,7 +29,7 @@
 /*
  * Route module
  */
-int route_clone(route_h * cloned_route, route_h origin)
+EXPORT_API int route_clone(route_h * cloned_route, route_h origin)
 {
 	ROUTE_NULL_ARG_CHECK(cloned_route);
 	ROUTE_NULL_ARG_CHECK(origin);
@@ -56,7 +56,7 @@ int route_clone(route_h * cloned_route, route_h origin)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_destroy(route_h route)
+EXPORT_API int route_destroy(route_h route)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 
@@ -69,7 +69,7 @@ int route_destroy(route_h route)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_get_request_id(route_h route, int *id)
+EXPORT_API int route_get_request_id(route_h route, int *id)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 	ROUTE_NULL_ARG_CHECK(id);
@@ -80,7 +80,7 @@ int route_get_request_id(route_h route, int *id)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_get_origin(route_h route, location_coords_s * origin)
+EXPORT_API int route_get_origin(route_h route, location_coords_s * origin)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 	ROUTE_NULL_ARG_CHECK(origin);
@@ -97,7 +97,7 @@ int route_get_origin(route_h route, location_coords_s * origin)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_get_destination(route_h route, location_coords_s * destination)
+EXPORT_API int route_get_destination(route_h route, location_coords_s * destination)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 	ROUTE_NULL_ARG_CHECK(destination);
@@ -114,7 +114,7 @@ int route_get_destination(route_h route, location_coords_s * destination)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_get_geometry_bounding_box(route_h route, location_coords_s * top_left, location_coords_s * bottom_right)
+EXPORT_API int route_get_geometry_bounding_box(route_h route, location_coords_s * top_left, location_coords_s * bottom_right)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 	ROUTE_NULL_ARG_CHECK(top_left);
@@ -134,7 +134,7 @@ int route_get_geometry_bounding_box(route_h route, location_coords_s * top_left,
 	return ROUTE_ERROR_NONE;
 }
 
-int route_get_distance_unit(route_h route, route_distance_unit_e * unit)
+EXPORT_API int route_get_distance_unit(route_h route, route_distance_unit_e * unit)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 	ROUTE_NULL_ARG_CHECK(unit);
@@ -166,7 +166,7 @@ int route_get_distance_unit(route_h route, route_distance_unit_e * unit)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_get_total_distance(route_h route, double *distance)
+EXPORT_API int route_get_total_distance(route_h route, double *distance)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 	ROUTE_NULL_ARG_CHECK(distance);
@@ -179,7 +179,7 @@ int route_get_total_distance(route_h route, double *distance)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_get_total_duration(route_h route, long *duration)
+EXPORT_API int route_get_total_duration(route_h route, long *duration)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 	ROUTE_NULL_ARG_CHECK(duration);
@@ -192,7 +192,7 @@ int route_get_total_duration(route_h route, long *duration)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_foreach_properties(route_h route, route_property_cb callback, void *user_data)
+EXPORT_API int route_foreach_properties(route_h route, route_property_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 	ROUTE_NULL_ARG_CHECK(callback);
@@ -214,7 +214,7 @@ int route_foreach_properties(route_h route, route_property_cb callback, void *us
 	return ROUTE_ERROR_NONE;
 }
 
-int route_foreach_segments(route_h route, route_segment_cb callback, void *user_data)
+EXPORT_API int route_foreach_segments(route_h route, route_segment_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(route);
 	ROUTE_NULL_ARG_CHECK(callback);
@@ -240,7 +240,7 @@ int route_foreach_segments(route_h route, route_segment_cb callback, void *user_
 /*
  * Route segment module
  */
-int route_segment_clone(route_segment_h * cloned_segment, route_segment_h origin)
+EXPORT_API int route_segment_clone(route_segment_h * cloned_segment, route_segment_h origin)
 {
 	ROUTE_NULL_ARG_CHECK(cloned_segment);
 	ROUTE_NULL_ARG_CHECK(origin);
@@ -266,7 +266,7 @@ int route_segment_clone(route_segment_h * cloned_segment, route_segment_h origin
 	return ROUTE_ERROR_NONE;
 }
 
-int route_segment_destroy(route_segment_h segment)
+EXPORT_API int route_segment_destroy(route_segment_h segment)
 {
 	ROUTE_NULL_ARG_CHECK(segment);
 
@@ -278,7 +278,7 @@ int route_segment_destroy(route_segment_h segment)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_segment_get_origin(route_segment_h segment, location_coords_s * origin)
+EXPORT_API int route_segment_get_origin(route_segment_h segment, location_coords_s * origin)
 {
 	ROUTE_NULL_ARG_CHECK(segment);
 	ROUTE_NULL_ARG_CHECK(origin);
@@ -295,7 +295,7 @@ int route_segment_get_origin(route_segment_h segment, location_coords_s * origin
 	return ROUTE_ERROR_NONE;
 }
 
-int route_segment_get_destination(route_segment_h segment, location_coords_s * destination)
+EXPORT_API int route_segment_get_destination(route_segment_h segment, location_coords_s * destination)
 {
 	ROUTE_NULL_ARG_CHECK(segment);
 	ROUTE_NULL_ARG_CHECK(destination);
@@ -312,7 +312,7 @@ int route_segment_get_destination(route_segment_h segment, location_coords_s * d
 	return ROUTE_ERROR_NONE;
 }
 
-int route_segment_get_geometry_bounding_box(route_segment_h segment,
+EXPORT_API int route_segment_get_geometry_bounding_box(route_segment_h segment,
 					    location_coords_s * top_left, location_coords_s * bottom_right)
 {
 	ROUTE_NULL_ARG_CHECK(segment);
@@ -333,7 +333,7 @@ int route_segment_get_geometry_bounding_box(route_segment_h segment,
 	return ROUTE_ERROR_NONE;
 }
 
-int route_segment_get_distance(route_segment_h segment, double *distance)
+EXPORT_API int route_segment_get_distance(route_segment_h segment, double *distance)
 {
 	ROUTE_NULL_ARG_CHECK(segment);
 	ROUTE_NULL_ARG_CHECK(distance);
@@ -346,7 +346,7 @@ int route_segment_get_distance(route_segment_h segment, double *distance)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_segment_get_duration(route_segment_h segment, long *duration)
+EXPORT_API int route_segment_get_duration(route_segment_h segment, long *duration)
 {
 	ROUTE_NULL_ARG_CHECK(segment);
 	ROUTE_NULL_ARG_CHECK(duration);
@@ -359,7 +359,7 @@ int route_segment_get_duration(route_segment_h segment, long *duration)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_segment_foreach_properties(route_segment_h segment, route_segment_property_cb callback, void *user_data)
+EXPORT_API int route_segment_foreach_properties(route_segment_h segment, route_segment_property_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(segment);
 	ROUTE_NULL_ARG_CHECK(callback);
@@ -381,7 +381,7 @@ int route_segment_foreach_properties(route_segment_h segment, route_segment_prop
 	return ROUTE_ERROR_NONE;
 }
 
-int route_segment_foreach_steps(route_segment_h segment, route_segment_step_cb callback, void *user_data)
+EXPORT_API int route_segment_foreach_steps(route_segment_h segment, route_segment_step_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(segment);
 	ROUTE_NULL_ARG_CHECK(callback);
@@ -407,7 +407,7 @@ int route_segment_foreach_steps(route_segment_h segment, route_segment_step_cb c
 /*
  * Route step module
  */
-int route_step_clone(route_step_h * cloned_step, route_step_h origin)
+EXPORT_API int route_step_clone(route_step_h * cloned_step, route_step_h origin)
 {
 	ROUTE_NULL_ARG_CHECK(cloned_step);
 	ROUTE_NULL_ARG_CHECK(origin);
@@ -433,7 +433,7 @@ int route_step_clone(route_step_h * cloned_step, route_step_h origin)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_step_destroy(route_step_h step)
+EXPORT_API int route_step_destroy(route_step_h step)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 
@@ -446,7 +446,7 @@ int route_step_destroy(route_step_h step)
 
 }
 
-int route_step_get_origin(route_step_h step, location_coords_s * origin)
+EXPORT_API int route_step_get_origin(route_step_h step, location_coords_s * origin)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 	ROUTE_NULL_ARG_CHECK(origin);
@@ -463,7 +463,7 @@ int route_step_get_origin(route_step_h step, location_coords_s * origin)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_step_get_destination(route_step_h step, location_coords_s * destination)
+EXPORT_API int route_step_get_destination(route_step_h step, location_coords_s * destination)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 	ROUTE_NULL_ARG_CHECK(destination);
@@ -480,7 +480,7 @@ int route_step_get_destination(route_step_h step, location_coords_s * destinatio
 	return ROUTE_ERROR_NONE;
 }
 
-int route_step_get_geometry_bounding_box(route_step_h step, location_coords_s * top_left, location_coords_s * bottom_right)
+EXPORT_API int route_step_get_geometry_bounding_box(route_step_h step, location_coords_s * top_left, location_coords_s * bottom_right)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 	ROUTE_NULL_ARG_CHECK(top_left);
@@ -500,7 +500,7 @@ int route_step_get_geometry_bounding_box(route_step_h step, location_coords_s * 
 	return ROUTE_ERROR_NONE;
 }
 
-int route_step_get_distance(route_step_h step, double *distance)
+EXPORT_API int route_step_get_distance(route_step_h step, double *distance)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 	ROUTE_NULL_ARG_CHECK(distance);
@@ -513,7 +513,7 @@ int route_step_get_distance(route_step_h step, double *distance)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_step_get_duration(route_step_h step, long *duration)
+EXPORT_API int route_step_get_duration(route_step_h step, long *duration)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 	ROUTE_NULL_ARG_CHECK(duration);
@@ -526,7 +526,7 @@ int route_step_get_duration(route_step_h step, long *duration)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_step_get_transport_mode(route_step_h step, char** mode)
+EXPORT_API int route_step_get_transport_mode(route_step_h step, char** mode)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 	ROUTE_NULL_ARG_CHECK(mode);
@@ -546,7 +546,7 @@ int route_step_get_transport_mode(route_step_h step, char** mode)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_step_get_instruction(route_step_h step, char **instruction)
+EXPORT_API int route_step_get_instruction(route_step_h step, char **instruction)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 	ROUTE_NULL_ARG_CHECK(instruction);
@@ -566,7 +566,7 @@ int route_step_get_instruction(route_step_h step, char **instruction)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_step_foreach_geometries(route_step_h step, route_step_geometry_cb callback, void *user_data)
+EXPORT_API int route_step_foreach_geometries(route_step_h step, route_step_geometry_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 	ROUTE_NULL_ARG_CHECK(callback);
@@ -592,7 +592,7 @@ int route_step_foreach_geometries(route_step_h step, route_step_geometry_cb call
 	return ROUTE_ERROR_NONE;
 }
 
-int route_step_foreach_properties(route_step_h step, route_step_property_cb callback, void *user_data)
+EXPORT_API int route_step_foreach_properties(route_step_h step, route_step_property_cb callback, void *user_data)
 {
 	ROUTE_NULL_ARG_CHECK(step);
 	ROUTE_NULL_ARG_CHECK(callback);

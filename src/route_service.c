@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2011 Samsung Electronics Co., Ltd All Rights Reserved
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright (c) 2011-2013 Samsung Electronics Co., Ltd All Rights Reserved
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #include <location/location.h>
 #include <location/location-types.h>
@@ -120,7 +120,7 @@ static void __LocationRouteCB(LocationError error, guint req_id, GList * route_l
 	free(calldata);
 }
 
-int route_service_create(route_service_h * service)
+EXPORT_API int route_service_create(route_service_h * service)
 {
 	ROUTE_NULL_ARG_CHECK(service);
 
@@ -153,7 +153,7 @@ int route_service_create(route_service_h * service)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_service_destroy(route_service_h service)
+EXPORT_API int route_service_destroy(route_service_h service)
 {
 	ROUTE_NULL_ARG_CHECK(service);
 
@@ -173,7 +173,7 @@ int route_service_destroy(route_service_h service)
 	return ROUTE_ERROR_NONE;
 }
 
-int route_service_get_preference(route_service_h service, route_preference_h * preference)
+EXPORT_API int route_service_get_preference(route_service_h service, route_preference_h * preference)
 {
 	ROUTE_NULL_ARG_CHECK(service);
 	ROUTE_NULL_ARG_CHECK(preference);
@@ -188,7 +188,7 @@ int route_service_get_preference(route_service_h service, route_preference_h * p
 	return ROUTE_ERROR_NONE;
 }
 
-int route_service_set_preference(route_service_h service, route_preference_h preference)
+EXPORT_API int route_service_set_preference(route_service_h service, route_preference_h preference)
 {
 	ROUTE_NULL_ARG_CHECK(service);
 	ROUTE_NULL_ARG_CHECK(preference);
@@ -203,7 +203,7 @@ int route_service_set_preference(route_service_h service, route_preference_h pre
 	return ROUTE_ERROR_NONE;
 }
 
-int route_service_find(route_service_h service, location_coords_s origin, location_coords_s destination,
+EXPORT_API int route_service_find(route_service_h service, location_coords_s origin, location_coords_s destination,
 		       location_coords_s * waypoint_list, int waypoint_num, route_service_found_cb callback, void *user_data,
 		       int *request_id)
 {
@@ -271,7 +271,7 @@ int route_service_find(route_service_h service, location_coords_s origin, locati
 	return ROUTE_ERROR_NONE;
 }
 
-int route_service_cancel(route_service_h service, int request_id)
+EXPORT_API int route_service_cancel(route_service_h service, int request_id)
 {
 	ROUTE_NULL_ARG_CHECK(service);
 	ROUTE_CHECK_CONDITION(request_id>0,ROUTE_ERROR_INVALID_PARAMETER,"request id should be > 0");
