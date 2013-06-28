@@ -5,6 +5,7 @@ License:        Apache-2.0
 Summary:        A Location Route library in Tizen Native API
 Group:          API/C API
 Source0:        %{name}-%{version}.tar.gz
+Source1001: 	capi-location-route.manifest
 BuildRequires:  cmake
 BuildRequires:  pkgconfig(capi-base-common)
 BuildRequires:  pkgconfig(capi-location-manager)
@@ -28,6 +29,7 @@ Development Package
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 MAJORVER=`echo %{version} | awk 'BEGIN {FS="."}{print $1}'`
@@ -45,10 +47,11 @@ make %{?_smp_mflags}
 
 
 %files
-%manifest capi-location-route.manifest
+%manifest %{name}.manifest
 %{_libdir}/libcapi-location-route.so.*
 
 %files devel
+%manifest %{name}.manifest
 %{_includedir}/location/*.h
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/libcapi-location-route.so
